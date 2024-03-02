@@ -1,1 +1,1 @@
-this is the big 0 notation together with the sorting algorithm session. thank you
+hello, this is the readme file for my sorting algorithm project, after spending overtime learning big Oand sorting

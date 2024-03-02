@@ -1,47 +1,34 @@
 #include "sort.h"
 
 /**
- * k_swap - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
- */
-void k_swap(int *a, int *b)
-{
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-/**
- * shell_sort - Sort an array of integers in ascending
- *              order using the shell sort algorithm.
- * @array: An array of integers.
- * @size: The size of the array.
- *
- * Description: Uses the Knuth interval sequence.
- */
+* shell_sort - function sorts an array of integers using
+* the shell sort algorithm with Knuth sequence
+* @array: the array of integers
+* @size: size of the array
+*
+* Return: none
+*/
 void shell_sort(int *array, size_t size)
 {
-	size_t gap, i, j;
+	size_t gap = 0, j, i;
+	int tmp;
 
-	if (array == NULL || size < 2)
+	if (size < 2)
 		return;
 
-	for (gap = 1; gap < (size / 3);)
-		gap = gap * 3 + 1;
+	while ((gap = gap * 3 + 1) < size)
+		;
 
-	for (; gap >= 1; gap /= 3)
+	gap = (gap - 1) / 3;
+
+	for (; gap > 0; gap = (gap - 1) / 3)
 	{
 		for (i = gap; i < size; i++)
 		{
-			j = i;
-			while (j >= gap && array[j - gap] > array[j])
-			{
-				k_swap(array + j, array + (j - gap));
-				j -= gap;
-			}
+			tmp = array[i];
+			for (j = i; j >= gap && tmp <= array[j - gap]; j -= gap)
+				array[j] = array[j - gap];
+			array[j] = tmp;
 		}
 		print_array(array, size);
 	}
